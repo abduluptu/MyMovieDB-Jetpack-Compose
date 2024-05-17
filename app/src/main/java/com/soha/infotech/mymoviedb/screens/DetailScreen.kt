@@ -1,4 +1,4 @@
-package com.soha.infotech.mymoviedb.ui.theme.screens
+package com.soha.infotech.mymoviedb.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

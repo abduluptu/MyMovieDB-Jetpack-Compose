@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 //Step6: Create a Repository
 
-class MovieRepository @Inject constructor(val movieService: MovieService) {
+class MovieRepository @Inject constructor(private val movieService: MovieService) {
 
     suspend fun getMovie(apiKey: String, page: Int): Movie {
         return movieService.getAllMovie(apiKey, page)

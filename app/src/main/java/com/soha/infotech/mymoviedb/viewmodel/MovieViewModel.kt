@@ -8,13 +8,19 @@ import com.soha.infotech.mymoviedb.data.models.Movie
 import com.soha.infotech.mymoviedb.data.models.MovieInfo
 import com.soha.infotech.mymoviedb.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 //Step7: Create a ViewModel
 
 @HiltViewModel
-class MovieViewModel @Inject constructor(val movieRepository: MovieRepository) : ViewModel() {
+class MovieViewModel @Inject constructor(private val movieRepository: MovieRepository) : ViewModel() {
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean>
+        get() = _isLoading
 
     val _movie = MutableLiveData<Movie>()
     val movie: LiveData<Movie>
@@ -22,7 +28,9 @@ class MovieViewModel @Inject constructor(val movieRepository: MovieRepository) :
 
     fun fetchMovies(apiKey: String, page: Int) {
         viewModelScope.launch {
+            _isLoading.value = true
             _movie.value = movieRepository.getMovie(apiKey = apiKey, page = page)
+            _isLoading.value = false
         }
     }
 

@@ -1,4 +1,4 @@
-package com.soha.infotech.mymoviedb.ui.theme.screens
+package com.soha.infotech.mymoviedb.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,9 +31,7 @@ import com.soha.infotech.mymoviedb.viewmodel.MovieViewModel
 @Composable
 fun HomeScreen(viewModel: MovieViewModel, navController: NavController) {
 
-    var movies by remember {
-        mutableStateOf(listOf<MovieInfo>())
-    }
+    var movies by remember { mutableStateOf(listOf<MovieInfo>()) }
 
     viewModel.movie.observeForever {
         movies = it.results
